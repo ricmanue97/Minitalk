@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minitalk.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ricmanue <ricmanue@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: ricmanue < ricmanue@student.42lisboa.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 11:31:39 by ricmanue          #+#    #+#             */
-/*   Updated: 2024/12/02 11:42:09 by ricmanue         ###   ########.fr       */
+/*   Updated: 2024/12/02 13:51:16 by ricmanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
