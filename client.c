@@ -6,7 +6,7 @@
 /*   By: ricmanue <ricmanue@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 11:32:20 by ricmanue          #+#    #+#             */
-/*   Updated: 2024/12/03 13:48:20 by ricmanue         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:43:33 by ricmanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,29 +56,23 @@ int	ft_ascii_to_bin(char letter, int pid)
 
 int	main(int ac, char **av)
 {
-	if (ac == 3)
-	{
-		int		pid;
-		char	*message;
+	struct sigaction	sa;
+	int					pid;
 
-		pid = ft_atoi(av[1]);
-		if (!pid)
-		{
-			ft_printf("PID error");
-			return (0);
-		}
-		message = av[2];
-		if (message[0] == "\0")
-		{
-			printf("No message sent");
-			return (0);
-		}
-		else
-		{
+	if (ac != 3)
+	{
 			if (ac < 3)
 				ft_printf("Too litlle arguments, need PID and message\n");
 			else if (ac > 3)
 				ft_printf("Too many arguments, need PID and message\n");
-		}
 	}
+	pid = ft_atoi(av[1]);
+	if (!pid || kill(pid,0) == -1)
+		return(ft_printf("PID error"));
+	ft_bzero(&sa, sizeof((struct sigaction)));
+	sa.sa_flags = SA_SIGINFO;
+	sa.sa_handler = signal_handler;
+
+
+
 }
