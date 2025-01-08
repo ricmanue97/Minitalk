@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ricmanue <ricmanue@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: ricmanue < ricmanue@student.42lisboa.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 11:32:20 by ricmanue          #+#    #+#             */
-/*   Updated: 2024/12/03 15:43:33 by ricmanue         ###   ########.fr       */
+/*   Updated: 2025/01/08 09:05:09 by ricmanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void signal_handler(int sig_nbr)
 		ft_printf("This message was ->%d bytes", bits / 8);
 }
 
-int	ft_ascii_to_bin(char letter, int pid)
+int	ft_atobin(char letter, int pid)
 {
 	int	i;
 	int	bin;
@@ -56,23 +56,28 @@ int	ft_ascii_to_bin(char letter, int pid)
 
 int	main(int ac, char **av)
 {
-	struct sigaction	sa;
+	struct sigaction	signal;
 	int					pid;
+	int					i;
 
-	if (ac != 3)
-	{
-			if (ac < 3)
-				ft_printf("Too litlle arguments, need PID and message\n");
-			else if (ac > 3)
-				ft_printf("Too many arguments, need PID and message\n");
-	}
+	i = 0;
+	if (ac > 3)
+		ft_printf("Too many arguments, need PID and message\n");
+	if (ac < 3)
+		ft_printf("Too litlle arguments, need PID and message\n");
 	pid = ft_atoi(av[1]);
 	if (!pid || kill(pid,0) == -1)
 		return(ft_printf("PID error"));
-	ft_bzero(&sa, sizeof((struct sigaction)));
-	sa.sa_flags = SA_SIGINFO;
-	sa.sa_handler = signal_handler;
-
-
-
+	ft_bzero(&signal, sizeof(struct sigaction));
+	signal.sa_flags = SA_SIGINFO;
+	signal.sa_handler = signal_handler;
+	if (pid < 0 || kill(pid, 0) == -1)
+		return (ft_printf("PID error \n"));
+	if (sigaction(SIGUSR1, &signal, NULL) == -1 \
+		|| sigaction(SIGUSR2, &signal, NULL) == -1)
+		return (ft_putstr_fd("Error sigaction\n",1), 1);
+	while (av[2][i])
+		ft_atobin((av[2][i++]), pid);
+	ft_atobin('\0', pid);
+	return(0);
 }
