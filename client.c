@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ricmanue < ricmanue@student.42lisboa.co    +#+  +:+       +#+        */
+/*   By: ricmanue <ricmanue@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 11:32:20 by ricmanue          #+#    #+#             */
-/*   Updated: 2025/01/08 09:05:09 by ricmanue         ###   ########.fr       */
+/*   Updated: 2025/01/08 14:39:00 by ricmanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void signal_handler(int sig_nbr)
 	static int	bits;
 
 	g_signal = true;
-	if (sig_nbr == SIGUSR1)
+	if (sig_nbr == SIGUSR2)
 		bits++;
-	else if (sig_nbr == SIGUSR2)
-		ft_printf("This message was ->%d bytes", bits / 8);
+	else if (sig_nbr == SIGUSR1)
+		ft_printf("This message was ->%d bytes\n", bits / 8);
 }
 
 int	ft_atobin(char letter, int pid)
@@ -75,7 +75,7 @@ int	main(int ac, char **av)
 		return (ft_printf("PID error \n"));
 	if (sigaction(SIGUSR1, &signal, NULL) == -1 \
 		|| sigaction(SIGUSR2, &signal, NULL) == -1)
-		return (ft_putstr_fd("Error sigaction\n",1), 1);
+		return (ft_putstr_fd("Error sigaction\n",2), 1);
 	while (av[2][i])
 		ft_atobin((av[2][i++]), pid);
 	ft_atobin('\0', pid);

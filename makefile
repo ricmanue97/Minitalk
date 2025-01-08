@@ -3,46 +3,68 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ricmanue < ricmanue@student.42lisboa.co    +#+  +:+       +#+         #
+#    By: ricmanue <ricmanue@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/01/05 10:55:02 by ricmanue          #+#    #+#              #
-#    Updated: 2025/01/08 09:09:04 by ricmanue         ###   ########.fr        #
+#    Created: 2025/01/08 14:10:46 by ricmanue          #+#    #+#              #
+#    Updated: 2025/01/08 14:34:18 by ricmanue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SOURCES = server.c client.c
-OBJECTS = $(SOURCES:.c=.o)
+# Standard
+SERVER					= server
+CLIENT					= client
 
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+# Directories
+LIBFT					= ./libft/libft.a
 
-all: server client
+# Compiler and CFLAGS
+CC						= @cc
+CFLAGS					= -Wall -Wextra -Werror
+RM						= @rm -f
 
-bonus: server client
+# Source Files
+SERVER_SRC				= server.c
+CLIENT_SRC				= client.c
 
-server: server.o libft ft_printf
-	$(CC) -o $@ $< -Llibft -lft -Lft_printf -lftprintf
+# Object Files
+SERVER_OBJ				= server.o
+CLIENT_OBJ				= client.o
 
-client: client.o libft ft_printf
-	$(CC) -o $@ $< -Llibft -lft -Lft_printf -lftprintf
+# Rules
+all:					$(CLIENT) $(SERVER)
 
-%.o: %.c
-	$(CC) -c $(CFLAGS) $?
+$(LIBFT):
+						@make -s -C ./libft
 
-libft:
-	make -C libft
+$(SERVER):				$(SERVER_OBJ) $(LIBFT)
+							@echo "Building $(SERVER)..."
+							$(CC) $(CFLAGS) $(SERVER_OBJ) $(LIBFT) -o $(SERVER)
+							@echo "$(SERVER) has been successfully built"
 
-ft_printf:
-	make -C ft_printf
+$(CLIENT):				$(CLIENT_OBJ) $(LIBFT)
+							@echo "Building $(CLIENT)..."
+							$(CC) $(CFLAGS) $(CLIENT_OBJ) $(LIBFT) -o $(CLIENT)
+							@echo "$(CLIENT) has been successfully built"
+
+$(SERVER_OBJ):			$(SERVER_SRC)
+							@echo "Compiling $(SERVER_SRC)..."
+							$(CC) $(CFLAGS) -c $(SERVER_SRC) -o $(SERVER_OBJ)
+
+$(CLIENT_OBJ):			$(CLIENT_SRC)
+							@echo "Compiling $(CLIENT_SRC)..."
+							$(CC) $(CFLAGS) -c $(CLIENT_SRC) -o $(CLIENT_OBJ)
 
 clean:
-	rm -f $(OBJECTS)
-	make -C libft clean
-	make -C ft_printf clean
-	
-fclean: clean
-	rm -f server client libft/libft.a ft_printf/libftprintf.a
+						$(RM) -r $(OBJ)
+							@make -s clean -C ./libft
+							@echo "Cleaned up .o files."
 
-re: fclean all
+fclean:					clean
+							@$(RM) $(CLIENT) $(SERVER)
+							@make -s fclean -C ./libft
+							@echo "Removed executables."
 
-.PHONY: all bonus libft ft_printf clean fclean re
+re:						fclean all
+							@echo "Fully rebuilt"
+
+.PHONY:	all clean fclean re

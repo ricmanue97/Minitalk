@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minitalk.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ricmanue < ricmanue@student.42lisboa.co    +#+  +:+       +#+        */
+/*   By: ricmanue <ricmanue@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 11:31:39 by ricmanue          #+#    #+#             */
-/*   Updated: 2025/01/08 09:10:22 by ricmanue         ###   ########.fr       */
+/*   Updated: 2025/01/08 14:17:34 by ricmanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include <stdio.h>
 #include <signal.h>
 #include <stdbool.h>
-#include "./libft/libft.h"
-#include "./ft_printf/ft_printf.h"
+#include "./libft/inc/libft.h"
+#include "./libft/inc/ft_printf.h"
 
 #endif
