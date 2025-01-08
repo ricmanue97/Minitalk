@@ -6,7 +6,7 @@
 /*   By: ricmanue <ricmanue@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 11:32:20 by ricmanue          #+#    #+#             */
-/*   Updated: 2025/01/08 14:39:00 by ricmanue         ###   ########.fr       */
+/*   Updated: 2025/01/08 16:04:01 by ricmanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	g_signal;
 
-void signal_handler(int sig_nbr)
+void	signal_handler(int sig_nbr)
 {
 	static int	bits;
 
@@ -34,7 +34,7 @@ int	ft_atobin(char letter, int pid)
 	while (bin >= 0)
 	{
 		i = 0;
-		if((letter >> bin) & 1)
+		if ((letter >> bin) & 1)
 			kill(pid, SIGUSR1);
 		else
 			kill(pid, SIGUSR2);
@@ -62,12 +62,12 @@ int	main(int ac, char **av)
 
 	i = 0;
 	if (ac > 3)
-		ft_printf("Too many arguments, need PID and message\n");
+		return (ft_printf("Too many arguments, need PID and message\n"), 1);
 	if (ac < 3)
-		ft_printf("Too litlle arguments, need PID and message\n");
+		return (ft_printf("Too litlle arguments, need PID and message\n"), 1);
 	pid = ft_atoi(av[1]);
-	if (!pid || kill(pid,0) == -1)
-		return(ft_printf("PID error"));
+	if (!pid || kill(pid, 0) == -1)
+		return (ft_printf("PID error"));
 	ft_bzero(&signal, sizeof(struct sigaction));
 	signal.sa_flags = SA_SIGINFO;
 	signal.sa_handler = signal_handler;
@@ -75,9 +75,9 @@ int	main(int ac, char **av)
 		return (ft_printf("PID error \n"));
 	if (sigaction(SIGUSR1, &signal, NULL) == -1 \
 		|| sigaction(SIGUSR2, &signal, NULL) == -1)
-		return (ft_putstr_fd("Error sigaction\n",2), 1);
+		return (ft_putstr_fd("Error sigaction\n", 2), 1);
 	while (av[2][i])
 		ft_atobin((av[2][i++]), pid);
 	ft_atobin('\0', pid);
-	return(0);
+	return (0);
 }

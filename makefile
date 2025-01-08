@@ -6,7 +6,7 @@
 #    By: ricmanue <ricmanue@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/08 14:10:46 by ricmanue          #+#    #+#              #
-#    Updated: 2025/01/08 14:34:18 by ricmanue         ###   ########.fr        #
+#    Updated: 2025/01/08 15:31:49 by ricmanue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ $(CLIENT_OBJ):			$(CLIENT_SRC)
 							$(CC) $(CFLAGS) -c $(CLIENT_SRC) -o $(CLIENT_OBJ)
 
 clean:
-						$(RM) -r $(OBJ)
+						$(RM) -r $(SERVER_OBJ) $(CLIENT_OBJ)
 							@make -s clean -C ./libft
 							@echo "Cleaned up .o files."
 
