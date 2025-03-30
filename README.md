@@ -37,9 +37,6 @@ The project permits the use of the following system calls:
 - `malloc`, `free`
 - `pause`, `sleep`, `usleep`, `exit`
 
-## Bonus Features
-- Server acknowledges receipt of messages by sending a signal back to the client.
-- Unicode character support for extended message encoding.
 
 ## Evaluation Criteria
 To be graded, the project must meet all mandatory requirements:
