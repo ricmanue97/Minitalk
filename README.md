@@ -8,7 +8,6 @@ Minitalk is a small data exchange program using UNIX signals to facilitate commu
 - Consists of two executables: `client` and `server`.
 - The server receives messages from multiple clients without restarting.
 - Communication is handled via `SIGUSR1` and `SIGUSR2` signals.
-- Bonus features include acknowledgment signals and Unicode support.
 
 ## Installation
 Clone the repository and compile the project using the provided Makefile:
