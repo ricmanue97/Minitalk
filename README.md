@@ -37,15 +37,3 @@ The project permits the use of the following system calls:
 - `malloc`, `free`
 - `pause`, `sleep`, `usleep`, `exit`
 
-
-## Evaluation Criteria
-To be graded, the project must meet all mandatory requirements:
-- No segmentation faults, bus errors, or memory leaks.
-- Efficient signal transmission without excessive delay.
-- Proper error handling.
-
-The bonus features will only be evaluated if the mandatory part is implemented perfectly.
-
-## Submission
-Submit your work via the assigned Git repository. Only the contents within the repository will be evaluated.
-
